@@ -1,0 +1,26 @@
+# Next.js Best Practices & Rules
+
+## Tech Stack Prefereces
+- Framework: Next.js 16+ (App Router)
+- Language: TypeScript (Strict mode)
+- Styling: Tailwind CSS
+- Components: Lucide React for icons, Shadcn UI for components
+- State Management: React Context or Zustand (if needed)
+
+## Coding Standards
+- Use 'use client' directive only when necessary (Interactivity, Browser APIs, Hooks).
+- Favor Server Components for data fetching.
+- Use Async/Await for data fetching in Server Components.
+- Functional Components: Use Arrow Functions (`const Component = () => ...`).
+- File Naming: Use lowercase with dashes (kebab-case) for routing folders.
+
+## Best Practices
+- Image Optimization: Always use `next/image`.
+- Routing: Use the `Link` component from `next/link` for internal navigation.
+- SEO: Use the Metadata API (generateMetadata) instead of the <Head> tag.
+- Error Handling: Always implement `error.tsx` and `loading.tsx` for route segments.
+
+## Windsurf Specific Flow
+- Before creating a new component, check if a similar one exists in `@/components/ui`.
+- When fixing bugs, always check the Terminal output and browser console logs.
+- After installing new packages, run `npm run dev` to ensure no dependency conflicts.
