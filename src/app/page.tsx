@@ -183,6 +183,32 @@ export default function Home() {
     }
   };
 
+  const [customYears, setCustomYears] = useState<string[]>([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('ita_custom_years');
+    if (stored) {
+      try {
+        setCustomYears(JSON.parse(stored));
+      } catch (e) {
+        console.error('Error parsing custom years', e);
+      }
+    }
+  }, []);
+
+  const handleAddYear = (newYear: string) => {
+    if (!customYears.includes(newYear)) {
+      const updated = [...customYears, newYear];
+      setCustomYears(updated);
+      localStorage.setItem('ita_custom_years', JSON.stringify(updated));
+    }
+    setSelectedYear(newYear);
+  };
+
+  const baseYears = ['2569', '2568']; // Removed 2566, 2567
+  const dbYears = items.map(i => String(i.fiscalYear));
+  const availableYears = Array.from(new Set([...baseYears, ...customYears, ...dbYears])).sort().reverse();
+
   return (
     <main className="flex-1 flex flex-col w-full animate-in fade-in duration-500 pb-20" style={{ background: 'var(--bg)' }}>
       <div className="container mx-auto px-4 mt-6">
@@ -205,6 +231,8 @@ export default function Home() {
           onProfileClick={() => setShowProfileModal(true)}
           onAddMoitClick={handleAddMoit}
           onRefresh={handleManualRefresh}
+          availableYears={availableYears}
+          onAddYear={handleAddYear}
         />
 
         {/* ส่วนแสดงเนื้อหาหลัก */}

@@ -32,6 +32,8 @@ interface FilterSectionProps {
   onProfileClick?: () => void;
   onAddMoitClick?: () => void;
   onRefresh?: () => void;
+  availableYears?: string[];
+  onAddYear?: (year: string) => void;
 }
 
 export default function FilterSection({
@@ -48,7 +50,9 @@ export default function FilterSection({
   onManageUsersClick,
   onProfileClick,
   onAddMoitClick,
-  onRefresh
+  onRefresh,
+  availableYears = [],
+  onAddYear
 }: FilterSectionProps) {
 
   const [refreshing, setRefreshing] = useState(false);
@@ -150,9 +154,9 @@ export default function FilterSection({
               {showYearDropdown && (
                 <div
                   className="absolute left-0 mt-1.5 w-full rounded-xl shadow-xl z-50 py-1 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150"
-                  style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-mid)' }}
+                  style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-mid)', maxHeight: '300px', overflowY: 'auto' }}
                 >
-                  {FISCAL_YEARS.map(year => (
+                  {availableYears.map(year => (
                     <button
                       key={year}
                       onClick={() => { 
@@ -172,6 +176,25 @@ export default function FilterSection({
                       {String(year) === selectedYear && <Check size={14} style={{ color: 'var(--brand)' }} />}
                     </button>
                   ))}
+                  {isAdmin && onAddYear && (
+                    <div className="border-t mt-1 pt-1" style={{ borderColor: 'var(--border)' }}>
+                      <button
+                        onClick={() => {
+                          const newYear = window.prompt('เพิ่มปีงบประมาณใหม่ (เช่น 2570)');
+                          if (newYear && newYear.trim() !== '') {
+                            onAddYear(newYear.trim());
+                            setShowYearDropdown(false);
+                          }
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2 text-sm font-prompt transition-colors text-left"
+                        style={{ color: 'var(--brand)' }}
+                        onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)'}
+                        onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+                      >
+                        <Plus size={14} /> เพิ่มปีงบประมาณ
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

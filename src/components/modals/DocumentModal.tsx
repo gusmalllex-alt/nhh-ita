@@ -11,6 +11,7 @@ interface DocumentModalProps {
   onUploadSuccess: () => void;
   editDoc?: GASDocument | null;
   currentYear?: string;
+  availableYears?: string[];
 }
 
 interface FilePreview {
@@ -30,6 +31,7 @@ export default function DocumentModal({
   onUploadSuccess,
   editDoc = null,
   currentYear,
+  availableYears = ['2569', '2568']
 }: DocumentModalProps) {
   const isEditMode = !!editDoc;
 
@@ -398,7 +400,7 @@ export default function DocumentModal({
                           className={selectClass}
                           style={selectStyle}
                         >
-                          {YEAR_OPTIONS.map((y) => (
+                          {availableYears.map((y) => (
                             <option key={y} value={y} style={{ background: 'var(--bg-surface)', color: 'var(--text)' }}>{y}</option>
                           ))}
                         </select>
