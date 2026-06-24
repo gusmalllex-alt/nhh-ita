@@ -2,7 +2,6 @@
 // This service connects to your Google Apps Script for document and user management
 
 const SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbxnf30MIYlhgXd0uhSszCaPtKngBuJ7q1Kc3yeo8pqihCRg0AzphC1mEPU4dTEi_xL_Og/exec';
-const PROXY_URL = '/api/gas-proxy';
 
 export interface Document {
   id: number;
@@ -53,10 +52,10 @@ export interface UserData {
 // This requires deploying the script as a Web App with "Anyone" access
 async function callScriptWithCORS(functionName: string, data: unknown = {}) {
   try {
-    const response = await fetch(PROXY_URL, {
+    const response = await fetch(SCRIPT_URL, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'text/plain',
       },
       body: JSON.stringify({ function: functionName, ...(data as Record<string, unknown>) }),
     });
@@ -88,11 +87,11 @@ export async function getDocuments(forceRefresh = false): Promise<Document[]> {
     return cachedDocuments;
   }
   try {
-    console.log('getDocuments: calling GAS proxy');
+    console.log('getDocuments: calling GAS directly');
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort('Timeout'), 60000); // 60 second timeout
 
-    const response = await fetch(`${PROXY_URL}?function=getData`, {
+    const response = await fetch(`${SCRIPT_URL}?function=getData`, {
       signal: controller.signal
     });
     clearTimeout(timeoutId);
@@ -126,7 +125,7 @@ export async function editDocument(data: EditData): Promise<{ status: string; me
 // User Management
 export async function getUsers(): Promise<User[]> {
   try {
-    const response = await fetch(`${PROXY_URL}?function=getUsers`);
+    const response = await fetch(`${SCRIPT_URL}?function=getUsers`);
     const result = await response.json();
     return result.data || [];
   } catch (error) {

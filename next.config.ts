@@ -5,7 +5,7 @@ const isProd = process.env.NODE_ENV === "production";
 const repoName = "nhh-ita";
 
 const nextConfig: NextConfig = {
-  // output: "export",       // Disabled to allow API routes
+  output: "export",       // Required for GitHub Pages
   trailingSlash: true,    // สร้าง /path/ แทน /path (ป้องกัน 404)
   images: {
     unoptimized: true,    // ปิด Next.js Image Optimization (ไม่รองรับบน static host)
