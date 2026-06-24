@@ -162,8 +162,26 @@ export async function changePassword(data: { username: string; password: string 
   return callScriptWithCORS('changePassword', data);
 }
 
-export async function getMoits(): Promise<{ id: string; name: string; createdAt: string }[]> {
-  return callScriptWithCORS('getMoits', {});
+export async function getMoits(forceRefresh = false): Promise<{ id: string; name: string; createdAt: string }[]> {
+  if (!forceRefresh && cachedMoits && Date.now() - cachedMoitsTime < CACHE_TTL) {
+    return cachedMoits;
+  }
+  
+  try {
+    const result = await callScriptWithCORS('getMoits', {});
+    
+    if (Array.isArray(result)) {
+      cachedMoits = result;
+      cachedMoitsTime = Date.now();
+      return result;
+    }
+    
+    console.error('getMoits returned non-array:', result);
+    return cachedMoits || [];
+  } catch (error) {
+    console.error('Error fetching moits:', error);
+    return cachedMoits || [];
+  }
 }
 
 export async function addMoit(data: { id: string; name: string }): Promise<{ status: string; message?: string }> {

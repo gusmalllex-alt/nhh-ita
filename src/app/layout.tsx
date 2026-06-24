@@ -26,8 +26,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th" className={`${promptFont.variable} antialiased`}>
-      <body className="flex flex-col min-h-screen font-sans overflow-x-hidden" style={{ background: 'var(--bg)', color: 'var(--text)' }}>
+    <html lang="th" className={`${promptFont.variable} antialiased`} suppressHydrationWarning>
+      <body className="flex flex-col min-h-screen font-sans overflow-x-hidden" style={{ background: 'var(--bg)', color: 'var(--text)' }} suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
           {children}

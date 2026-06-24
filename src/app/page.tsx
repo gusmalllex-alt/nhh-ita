@@ -258,8 +258,8 @@ export default function Home() {
                 </div>
               </div>
               <MoitGrid
+                moitList={moitList.length > 0 ? moitList : undefined}
                 onSelect={setSelectedMoit}
-                moitList={moitList}
                 docCounts={moitCounts}
                 canManage={isSuperAdmin}
                 canDelete={isSuperAdmin}
