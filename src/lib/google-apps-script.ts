@@ -1,7 +1,7 @@
 // Google Apps Script Service Integration
 // This service connects to your Google Apps Script for document and user management
 
-const SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbxnf30MIYlhgXd0uhSszCaPtKngBuJ7q1Kc3yeo8pqihCRg0AzphC1mEPU4dTEi_xL_Og/exec';
+const SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbzjvrIy3eq8eopg3qPgYQvk3xm1abW7tLqJE_osZ24s3Nt6R7mvTvSLctzs0pDfOuV9CA/exec';
 
 export interface Document {
   id: number;
