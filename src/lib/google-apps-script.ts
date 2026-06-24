@@ -52,7 +52,7 @@ export interface UserData {
 // This requires deploying the script as a Web App with "Anyone" access
 async function callScriptWithCORS(functionName: string, data: unknown = {}) {
   try {
-    const response = await fetch(SCRIPT_URL, {
+    const response = await fetch(`${SCRIPT_URL}?function=${functionName}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain',
