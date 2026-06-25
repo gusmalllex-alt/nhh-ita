@@ -122,37 +122,45 @@ export default function UserProfileModal({ isOpen, onClose, userId }: UserProfil
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" 
+        className="fixed inset-0 bg-black/40 backdrop-blur-md transition-opacity animate-in fade-in duration-300 pointer-events-auto" 
         onClick={onClose}
-      ></div>
+      />
 
       {/* Modal */}
-      <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden transform transition-all animate-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-md rounded-3xl flex flex-col max-h-[90vh] overflow-hidden transform transition-all animate-in zoom-in-95 slide-in-from-bottom-4 duration-300 pointer-events-auto glass-modal">
         
+        {/* Top accent gradient */}
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500 z-20" />
+        {/* Decorative blob */}
+        <div className="absolute -top-32 -right-32 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-20 bg-gradient-to-br from-emerald-400 to-teal-500 z-0" />
+
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-white z-10 shrink-0">
+        <div className="flex items-center justify-between p-6 border-b z-10 shrink-0 relative" style={{ borderColor: 'var(--border)' }}>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-emerald-50 rounded-xl">
-              <User size={20} className="text-emerald-600" />
+            <div className="p-2.5 rounded-xl" style={{ background: 'var(--brand)', color: '#fff' }}>
+              <User size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-slate-800 font-prompt">โปรไฟล์ของฉัน</h2>
-              <p className="text-xs text-slate-500 font-prompt">จัดการข้อมูลส่วนตัวและรหัสผ่าน</p>
+              <h2 className="text-lg font-bold font-prompt" style={{ color: 'var(--text)' }}>โปรไฟล์ของฉัน</h2>
+              <p className="text-xs font-prompt" style={{ color: 'var(--text-muted)' }}>จัดการข้อมูลส่วนตัวและรหัสผ่าน</p>
             </div>
           </div>
           <button 
             onClick={onClose}
-            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-colors"
+            className="p-2 rounded-xl transition-colors"
+            style={{ color: 'var(--text-muted)' }}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--bg-card)'}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
           >
             <X size={20} />
           </button>
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-5 custom-scrollbar bg-slate-50/50">
+        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar relative z-10">
           
           {error && (
             <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-xl flex items-start gap-2 text-red-600 text-sm font-prompt animate-in slide-in-from-top-2">

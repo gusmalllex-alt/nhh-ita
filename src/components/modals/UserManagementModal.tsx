@@ -173,7 +173,7 @@ export default function UserManagementModal({ isOpen, onClose }: UserManagementM
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-md animate-in fade-in duration-300"
         onClick={onClose}
       />
 
@@ -184,16 +184,14 @@ export default function UserManagementModal({ isOpen, onClose }: UserManagementM
           onClick={(e) => e.stopPropagation()}
         >
           <div 
-            className="relative backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden flex flex-col"
-            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-mid)' }}
+            className="relative rounded-3xl overflow-hidden flex flex-col glass-modal"
           >
-            {/* Top accent bar */}
-            <div className="h-1.5 w-full shrink-0" style={{ background: 'var(--brand)' }} />
+            {/* Top accent gradient */}
+            <div className="h-1.5 w-full shrink-0 bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500" />
 
             {/* Decorative */}
             <div 
-                className="absolute -top-10 -right-10 w-36 h-36 rounded-full blur-3xl pointer-events-none opacity-20" 
-                style={{ background: 'var(--brand)' }}
+                className="absolute -top-32 -right-32 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-20 bg-gradient-to-br from-emerald-400 to-teal-500" 
             />
 
             {/* Header */}

@@ -92,22 +92,21 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess }: AuthModalP
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate-in fade-in duration-200"
+        className="fixed inset-0 bg-black/40 backdrop-blur-md flex items-center justify-center z-50 animate-in fade-in duration-300"
         onClick={onClose}
       />
 
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div
-          className="w-full max-w-md rounded-2xl overflow-hidden modal-pop relative"
-          style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-mid)', boxShadow: '0 24px 64px rgba(0,0,0,0.3)' }}
+          className="w-full max-w-md rounded-3xl overflow-hidden glass-modal modal-pop relative"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Top accent bar — brand green */}
-          <div className="h-1 w-full" style={{ background: 'var(--brand)' }} />
+          {/* Top accent gradient */}
+          <div className="h-1.5 w-full bg-gradient-to-r from-emerald-400 via-emerald-500 to-teal-500" />
 
           {/* Subtle background blob */}
-          <div className="absolute -top-20 -right-20 w-56 h-56 rounded-full blur-3xl pointer-events-none opacity-20" style={{ background: 'var(--brand)' }} />
+          <div className="absolute -top-32 -right-32 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-20 bg-gradient-to-br from-emerald-400 to-teal-500" />
 
           <div className="relative p-8">
 

@@ -207,6 +207,14 @@
   }
   .data-table-row:hover { background-color: var(--bg-card); }
   .data-table-row:last-child { border-bottom: none; }
+  /* ── Glass Modal ── */
+  .glass-modal {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-mid);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
 }
 
 @layer utilities {
@@ -232,7 +240,9 @@
    Animations
    ============================================================ */
 @keyframes modalPop {
-  0%   { transform: scale(0.95); opacity: 0; }
+  0%   { transform: scale(0.9); opacity: 0; }
+  50%  { transform: scale(1.02); opacity: 1; }
   100% { transform: scale(1);    opacity: 1; }
 }
-.modal-pop { animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.modal-pop { animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+

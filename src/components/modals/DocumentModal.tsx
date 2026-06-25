@@ -195,7 +195,7 @@ export default function DocumentModal({
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+        className="fixed inset-0 z-50 bg-black/40 backdrop-blur-md animate-in fade-in duration-300"
         onClick={handleClose}
       />
 
@@ -206,8 +206,7 @@ export default function DocumentModal({
           onClick={(e) => e.stopPropagation()}
         >
           <div
-            className="relative backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden flex flex-col"
-            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-mid)' }}
+            className="relative rounded-3xl overflow-hidden flex flex-col glass-modal"
           >
             {/* Top accent bar */}
             <div className="h-1.5 w-full shrink-0" style={{ background: accentColor }} />
